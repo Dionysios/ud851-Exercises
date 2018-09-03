@@ -1,2 +1,2 @@
-*.gradle/wrapper/gradle-wrapper.properties
+**/gradle-wrapper.properties
 .DS_Store
