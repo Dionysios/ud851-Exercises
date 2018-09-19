@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements
 
     private Toast mToast;
 
-    ChargingBroadcastReceiver mChargingReceiver;
-    IntentFilter mChargingIntentFilter;
+   // ChargingBroadcastReceiver mChargingReceiver;
+  //  IntentFilter mChargingIntentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,32 +69,32 @@ public class MainActivity extends AppCompatActivity implements
         /*
          * Setup and register the broadcast receiver
          */
-        mChargingIntentFilter = new IntentFilter();
-        mChargingReceiver = new ChargingBroadcastReceiver();
-        mChargingIntentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
-        mChargingIntentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
+       // mChargingIntentFilter = new IntentFilter();
+       // mChargingReceiver = new ChargingBroadcastReceiver();
+       // mChargingIntentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
+       // mChargingIntentFilter.addAction(Intent.ACTION_POWER_DISCONNECTED);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        registerReceiver(mChargingReceiver, mChargingIntentFilter);
+        //registerReceiver(mChargingReceiver, mChargingIntentFilter);
 
         // The developer documentation shows how to get battery information pre Android M:
         // https://developer.android.com/training/monitoring-device-state/battery-monitoring.html
         // In Android M and beyond you can simply get a reference to the BatteryManager and call
         // isCharging.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
-            boolean isCharging = batteryManager.isCharging();
-            showCharging(isCharging);
-        } else {
-            IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-            Intent currentBatteryStatusIntent = registerReceiver(null, ifilter);
-            int batteryStatus = currentBatteryStatusIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-            boolean isCharging = batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING || batteryStatus == BatteryManager.BATTERY_STATUS_FULL;
-            showCharging(isCharging);
-        }
+        //if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+         //   BatteryManager batteryManager = (BatteryManager) getSystemService(BATTERY_SERVICE);
+          //  boolean isCharging = batteryManager.isCharging();
+          //  showCharging(isCharging);
+        ///} else {
+          //  IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+          //  Intent currentBatteryStatusIntent = registerReceiver(null, ifilter);
+          //  int batteryStatus = currentBatteryStatusIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+           // boolean isCharging = batteryStatus == BatteryManager.BATTERY_STATUS_CHARGING || batteryStatus == BatteryManager.BATTERY_STATUS_FULL;
+          //  showCharging(isCharging);
+       // }
 
         // Check if you are on Android M or later, if so...
             //Get a BatteryManager instance using getSystemService()
@@ -111,13 +111,13 @@ public class MainActivity extends AppCompatActivity implements
             // the battery is currently charging.
             //  Update the UI using your showCharging method
 
-        registerReceiver(mChargingReceiver, mChargingIntentFilter);
+       // registerReceiver(mChargingReceiver, mChargingIntentFilter);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(mChargingReceiver);
+        //unregisterReceiver(mChargingReceiver);
     }
 
 
@@ -175,22 +175,22 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private void showCharging(boolean isCharging){
-        if (isCharging) {
-            mChargingImageView.setImageResource(R.drawable.ic_power_pink_80px);
+//    private void showCharging(boolean isCharging){
+//        if (isCharging) {
+//            mChargingImageView.setImageResource(R.drawable.ic_power_pink_80px);
+//
+//        } else {
+//            mChargingImageView.setImageResource(R.drawable.ic_power_grey_80px);
+//        }
+//    }
 
-        } else {
-            mChargingImageView.setImageResource(R.drawable.ic_power_grey_80px);
-        }
-    }
-
-    private class ChargingBroadcastReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            boolean isCharging = (action.equals(Intent.ACTION_POWER_CONNECTED));
-
-            showCharging(isCharging);
-        }
-    }
+//    private class ChargingBroadcastReceiver extends BroadcastReceiver {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            boolean isCharging = (action.equals(Intent.ACTION_POWER_CONNECTED));
+//
+//            showCharging(isCharging);
+//        }
+//    }
 }
