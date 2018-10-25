@@ -27,7 +27,6 @@ dependencies {
 
     //FAB dependencies
     implementation 'com.android.support:design:27.0.2'
-
     // TODO (1) Add room dependencies
 
     //Testing
